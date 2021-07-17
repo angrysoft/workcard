@@ -77,19 +77,20 @@ table.worker-card {
 }
 
 table.summary {
-    width: 50%;
+    width: 70%;
 }
 
-.worker-card tr {
+.worker-card tr,
+.summary tr {
     height: 1.5rem;
 }
 
 .worker-card th {
-    min-width: 6rem;
+    min-width: 6.5rem;
 }
 
 th.date {
-    min-width: 3rem !important;
+    min-width: 3.5rem !important;
 }
 
 .worker-card th {
@@ -118,11 +119,11 @@ caption {
 
 .summary td {
     text-align: left;
-    padding: 0.3rem 0 0.3rem 0.1rem;
+    padding: 0.2rem 0 0.2rem 0.1rem;
 }
 
 .summary th {
-    padding: 0.3rem 0;
+    padding: 0.2rem 0;
 }
 
 footer {
@@ -140,11 +141,8 @@ footer {
         padding: 0;
     }
 
-    .cards {
-        padding: 0;
-    }
-
     work-card {
-        page-break-after: always;
+        padding: 0;
+        page-break-after: auto;
     }
 }

@@ -103,7 +103,7 @@ class Card extends HTMLElement {
         let tBody = document.createElement('tbody');
         tHead.innerHTML = `
           <tr>
-             <th rowspan="2" class="">DATA</th>
+             <th rowspan="2" class="date">DATA</th>
              <th rowspan="2" class="">DZIEŃ</th> 
              <th rowspan="2" class="">NOC</th>
              <th colspan="2" class="font-small">PODPIS <strong>numeryczny</strong> - sam nr wg karty</th>
