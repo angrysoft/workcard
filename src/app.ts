@@ -3,6 +3,7 @@ class App {
     private cards: HTMLDivElement;
     private inputMonth: HTMLInputElement;
     private inputCards: HTMLInputElement;
+    private storage: Storage = window.localStorage;
 
 
     constructor() {
@@ -10,6 +11,10 @@ class App {
         this.inputCards = document.getElementById('cards-input') as HTMLInputElement;
         this.cards = document.querySelector('.cards') as HTMLDivElement;
         this.buttons= document.querySelector('.buttons') as HTMLElement;
+        let storedCards:string = this.storage.getItem('cards') || '';
+        if (storedCards) {
+            this.inputCards.value = storedCards;
+        }
         this.buttons.addEventListener('click', (ev) => {
             this.makeAction(ev);
         });
@@ -31,6 +36,7 @@ class App {
 
             case 'clear': {
                 this.cards.innerHTML = '';
+                this.inputCards.value = '';
                 break;
             }
         }
@@ -44,12 +50,11 @@ class App {
             this.inputCards.reportValidity();
             return
         }
-        
+        this.storage.setItem('cards', this.inputCards.value);
         let cardList: Array<string> = this.inputCards.value.split(',') || [];
-        let days = this.getDaysInMonth();
         this.cards.innerHTML = '';
         cardList.forEach(workerNo => {
-            this.cards.appendChild(new Card(days, workerNo));
+            this.cards.appendChild(new Card(this.getDaysInMonth(), this.getMonthYearString(), workerNo));
         });
 
     }
@@ -58,16 +63,23 @@ class App {
         let date = new Date(this.inputMonth.value);
         return new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
     }
+
+    private getMonthYearString():string {
+        let date = new Date(this.inputMonth.value);
+        return date.toLocaleString('pl-PL', { month: 'long', year: 'numeric' })
+    }
 }
 
 
 class Card extends HTMLElement {
     private workerNo:string;
     private monthDays:number;
+    private dateLong:string;
 
-    constructor(days:number, worker: string) {
+    constructor(days:number, date:string, worker: string) {
         super();
         this.monthDays = days;
+        this.dateLong = date;
         this.workerNo = worker;
     }
 
@@ -75,7 +87,7 @@ class Card extends HTMLElement {
         let header = document.createElement('header');
         header.innerHTML = `
         <div>
-            <label class="label">LISTA OBECNOŚCI ZA MIESIĄC: </label><span>Lipiec 2021</span>
+            <label class="label">LISTA OBECNOŚCI ZA MIESIĄC: </label><span>${this.dateLong.toUpperCase()}</span>
         </div>
         <div>
             <label class="label">Nr pracownika (zgodny z kartą wejsciową): </label><span>${this.workerNo}</span>
@@ -91,9 +103,9 @@ class Card extends HTMLElement {
         let tBody = document.createElement('tbody');
         tHead.innerHTML = `
           <tr>
-             <th rowspan="2" class="bold">DATA</th>
-             <th rowspan="2" class="bold">DZIEŃ</th> 
-             <th rowspan="2" class="bold">NOC</th>
+             <th rowspan="2" class="">DATA</th>
+             <th rowspan="2" class="">DZIEŃ</th> 
+             <th rowspan="2" class="">NOC</th>
              <th colspan="2" class="font-small">PODPIS <strong>numeryczny</strong> - sam nr wg karty</th>
              <th rowspan="2">
                 <span class="font-small">INFORMACJE DODATKOWE DLA PRACODAWCY</span><br>
@@ -101,8 +113,8 @@ class Card extends HTMLElement {
             </th>
           </tr>
           <tr>
-             <th>PRACOWNIKA</th>
-             <th>PRZEŁOŻONEGO</th>
+             <th class="font-small">PRACOWNIKA</th>
+             <th class="font-small">PRZEŁOŻONEGO</th>
           </tr>`
 
         for (let day = 1;day <= this.monthDays; day++) {
@@ -129,12 +141,12 @@ class Card extends HTMLElement {
         <table class="summary">
         <caption class="bold">WYPEŁNIA PRACODAWCA !!!</caption>
             <tr>
-                <th colspan="2">GODZINY</th>
-                <th colspan="2">RAZEM</th>
+                <th colspan="2" style="width:50%">GODZINY</th>
+                <th colspan="2" style="width:50%">RAZEM</th>
             </tr>
             <tr>
-                <td>DZIEŃ</td>
-                <td></td>
+                <td style="width:25%">DZIEŃ</td>
+                <td style="width:25%"></td>
                 <td rowspan="2"></td>
                 <td rowspan="3"></td>
             </tr>
