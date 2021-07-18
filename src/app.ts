@@ -3,12 +3,14 @@ class App {
     private cards: HTMLDivElement;
     private inputMonth: HTMLInputElement;
     private inputCards: HTMLInputElement;
+    private inputWithoutNo: HTMLInputElement;
     private storage: Storage = window.localStorage;
 
 
     constructor() {
         this.inputMonth = document.getElementById('month') as HTMLInputElement;
         this.inputCards = document.getElementById('cards-input') as HTMLInputElement;
+        this.inputWithoutNo = document.getElementById('without-no') as HTMLInputElement;
         this.cards = document.querySelector('.cards') as HTMLDivElement;
         this.buttons= document.querySelector('.buttons') as HTMLElement;
         let storedCards:string = this.storage.getItem('cards') || '';
@@ -20,7 +22,7 @@ class App {
         });
     }
 
-    private makeAction(ev: MouseEvent) {
+    private async makeAction(ev: MouseEvent) {
         let btn = ev.target as HTMLButtonElement;
 
         switch (btn.dataset['cmd']) {
@@ -30,7 +32,7 @@ class App {
             }
 
             case 'print': {
-                window.print();
+                await this.printCards();
                 break;
             }
 
@@ -40,6 +42,10 @@ class App {
                 break;
             }
         }
+    }
+
+    private async printCards() {
+        window.print();
     }
 
     private generate() {
@@ -53,6 +59,10 @@ class App {
         this.storage.setItem('cards', this.inputCards.value);
         let cardList: Array<string> = this.inputCards.value.split(',') || [];
         this.cards.innerHTML = '';
+        if (this.inputWithoutNo.checked ) {
+            this.cards.appendChild(new Card(this.getDaysInMonth(), this.getMonthYearString(), ''));
+            return;
+        }
         cardList.forEach(workerNo => {
             this.cards.appendChild(new Card(this.getDaysInMonth(), this.getMonthYearString(), workerNo));
         });
