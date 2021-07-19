@@ -44,10 +44,24 @@ body {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.label-margin {
+    margin-right: 7rem;
+}
 
-.dark input {
-    background: white !important;
-    color:black !important;
+.font-1 {
+    font-size: 1rem;
+}
+
+input#cards-input,
+input#month {
+    background: white;
+    color: black;
+}
+
+input#cards-input::selection,
+input#month::selection {
+    background: black;
+    color: white;
 }
 
 .cards {
@@ -57,8 +71,10 @@ body {
 }
 
 work-card {
-    width: 210mm;
-    height: 297mm;
+    display: grid;
+    grid-template-rows: 1fr 14fr 1fr;
+    width: 220mm;
+    height: 307mm;
     padding: 10mm;
     background: white;
     color:black;
@@ -67,7 +83,7 @@ work-card {
 }
 
 header {
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
     font-weight: 600;
 }
 
@@ -86,15 +102,22 @@ table.summary,
 
 table.worker-card {
     width: 100%;
+    height: 100%;
 }
 
 table.summary {
     width: 70%;
 }
 
-.worker-card tr,
+// .worker-card tr {
+//     height: 1.7rem;
+// }
+
+// .worker-card thead tr {
+//     height: 1.5rem;
+// }
 .summary tr {
-    height: 1.5rem;
+    height: 1.2rem;
 }
 
 .worker-card th {
@@ -154,6 +177,8 @@ footer {
     }
 
     work-card {
+        width: 210mm;
+        height: 297mm;
         padding: 0;
         page-break-after: auto;
     }

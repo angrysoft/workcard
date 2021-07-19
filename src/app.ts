@@ -63,6 +63,7 @@ class App {
             this.cards.appendChild(new Card(this.getDaysInMonth(), this.getMonthYearString(), ''));
             return;
         }
+        
         cardList.forEach(workerNo => {
             this.cards.appendChild(new Card(this.getDaysInMonth(), this.getMonthYearString(), workerNo));
         });
@@ -97,10 +98,10 @@ class Card extends HTMLElement {
         let header = document.createElement('header');
         header.innerHTML = `
         <div>
-            <label class="label">LISTA OBECNOŚCI ZA MIESIĄC: </label><span>${this.dateLong.toUpperCase()}</span>
+            <label class="label label-margin">LISTA OBECNOŚCI ZA MIESIĄC: </label><span class="font-1">${this.dateLong.toUpperCase()}</span>
         </div>
         <div>
-            <label class="label">Nr pracownika (zgodny z kartą wejsciową): </label><span>${this.workerNo}</span>
+            <label class="label label-margin">Nr pracownika (zgodny z kartą wejsciową): </label><span class="font-1">${this.workerNo}</span>
         </div>`;
 
         this.appendChild(header);
