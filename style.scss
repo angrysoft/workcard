@@ -64,12 +64,6 @@ input#month::selection {
     color: white;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
 work-card {
     display: grid;
     grid-template-rows: 1fr 14fr 1fr;
@@ -78,7 +72,7 @@ work-card {
     padding: 10mm;
     background: white;
     color:black;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
     font-size: 11px;
 }
 
@@ -107,15 +101,9 @@ table.worker-card {
 
 table.summary {
     width: 70%;
+    height: 100%;
 }
 
-// .worker-card tr {
-//     height: 1.7rem;
-// }
-
-// .worker-card thead tr {
-//     height: 1.5rem;
-// }
 .summary tr {
     height: 1.2rem;
 }
@@ -141,8 +129,6 @@ caption {
     text-align: left;
     margin-bottom: 0.1rem;
 }
-
-
 
 .font-small {
     font-size: 9px !important;
@@ -180,6 +166,11 @@ footer {
         width: 210mm;
         height: 297mm;
         padding: 0;
-        page-break-after: auto;
+        margin:0;
+    }
+
+    .page-a4 {
+        page-break-after: always;
+        page-break-inside: avoid;
     }
 }

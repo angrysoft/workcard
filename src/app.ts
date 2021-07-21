@@ -92,6 +92,7 @@ class Card extends HTMLElement {
         this.monthDays = days;
         this.dateLong = date;
         this.workerNo = worker;
+        this.className = 'page-a4';
     }
 
     private createHeader() {
