@@ -1,0 +1,83 @@
+<header>
+  <div class="header-item">
+    <span>LISTA OBECNOŚCI ZA MIESIĄC:</span>
+    <span class="header-item-data">
+      {{ date }}
+    </span>
+  </div>
+  <div class="header-item">
+    <span>Nr pracownika (zgodny z kartą wejściową):</span>
+    <span class="header-item-data">
+      {{ card() }}
+    </span>
+  </div>
+</header>
+<table class="font-normal leading-none">
+  <thead>
+    <tr>
+      <th rowSpan="2" class="font-medium" style="min-width: 3.5rem">DATA</th>
+      <th rowSpan="2" class="font-medium">DZIEŃ</th>
+      <th rowSpan="2" class="font-medium">NOC</th>
+      <th colSpan="2" class="text-small font-medium">
+        PODPIS <strong>numeryczny</strong> - sam nr wg karty
+      </th>
+      <th rowSpan="2">
+        <div class="text-small font-medium">
+          INFORMACJE DODATKOWE DLA PRACODAWCY
+        </div>
+        <div class="font-medium" style="font-size: 7px">
+          (w przypadku zastępstwa proszę wpisać za kogo)
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th class="text-small font-medium">PRACOWNIKA</th>
+      <th class="text-small font-medium">PRZEŁOŻONEGO</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (day of days(); track $index) {
+    <tr>
+      <td class="font-semibold">{{ day }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    }
+  </tbody>
+</table>
+<footer class="footer">
+  <table class="footer-table">
+    <caption class="font-bold" style="text-align: left; margin-bottom: 0.1rem">
+      WYPEŁNIA PRACODAWCA !!!
+    </caption>
+    <thead>
+      <tr style="height: 1.5rem">
+        <th colSpan="2">GODZINY</th>
+        <th colSpan="2">RAZEM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="footer-tr">
+        <td class="footer-td" style="width: 25%">DZIEŃ</td>
+        <td class="footer-td" style="width: 25%"></td>
+        <td rowSpan="2" class="text-left"></td>
+        <td rowSpan="3" class="text-left"></td>
+      </tr>
+      <tr class="footer-tr">
+        <td class="footer-td">NOC</td>
+        <td class="text-left"></td>
+      </tr>
+      <tr class="footer-tr">
+        <td colSpan="2" class="footer-td">URLOP</td>
+        <td class="text-left"></td>
+      </tr>
+      <tr class="footer-tr">
+        <td colSpan="3" class="footer-td">STATYSTYCZNE</td>
+        <td class="text-left"></td>
+      </tr>
+    </tbody>
+  </table>
+</footer>
