@@ -53,7 +53,7 @@
         >
           <mat-icon>description</mat-icon>Generuj Karty
         </button>
-        <button mat-fab extended type="button" (click)="print()">
+        <button mat-fab extended type="button" (click)="print()" [disabled]="cards().length === 0">
           <mat-icon>print</mat-icon>Drukuj
         </button>
         <button mat-fab extended type="button" (click)="clear()">
